@@ -1,0 +1,10 @@
+.btnConnect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 53%;
+}
+
+.msg{
+  border-bottom: 2px solid;
+}

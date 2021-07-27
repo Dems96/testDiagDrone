@@ -1,0 +1,41 @@
+{% include "base.html.twig" %}
+
+{# <pre>
+    {{ dump(message) }}
+</pre> #}
+
+{# <pre>
+    {{ dump(conversation) }}
+</pre> #}
+{# 
+<pre>
+    {{ dump(utilisateur) }}
+</pre> #}
+
+{# <h4> discussion avec </h4> #}
+
+{% if app.user %}
+    <a href="{{path('logout')}}"><button>se deconnecter</button></a>
+{% endif %}
+
+<div class="listMsg">
+    {% for conv in conversation %}
+
+        {# {% if msg.getIdConversation.id == conversation.id %} {{msg.message}}#}
+            <div class="msg">
+                <p> message de l'utilisateur numéro : {{conv.getIdUtilisateur.id}} <button class="getDiscuss" value="{{conv.id}}"> voir discussion</button> </p>
+            </div>
+        {# {% endif %} #}
+
+    {% endfor %}
+</div>
+
+<div class="modal" tabindex="-1" role="dialog">
+    {# {% include "modal/modalDiscu.html.twig" %} #}
+</div>
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
+{% endblock %}

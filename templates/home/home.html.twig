@@ -1,0 +1,32 @@
+{% include "base.html.twig" %}
+
+{% if error %}
+    <div class="alert alert-danger">
+        {{error.messageKey | trans(error.messagedata, 'security')}}
+    </div>
+    
+{% endif %}
+
+{% if app.user %}
+    <a href="{{path('logout')}}"><button>se deconnecter</button></a>
+
+{% else %}
+    <div class="btnConnect">
+
+        <a href="{{ path('user_login_auth',{ 'userType': "User" })}}"> <button class="btnUser"> User</button> </a>
+
+        <a href="{{ path('user_login_auth',{ 'userType': "Admin" })}}"> <button class="btnAdmin"> Admin </button> </a>
+    </div>
+{% endif %}
+
+ {% if is_granted('ROLE_ADMIN') %}
+   <a href="{{path ('list_msg')}}"><button class="histoMsg"> Voir l'historique des messages </button></a> 
+
+{% else %}
+    <button class="contactAdmin"> Contacter un Admin </button>
+{% endif %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
+{% endblock %}

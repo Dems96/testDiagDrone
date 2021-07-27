@@ -1,0 +1,36 @@
+<title>Se connecter</title>
+
+{% include "base.html.twig" %}
+
+{% block body %}
+
+{% if error %}
+    <div class="alert alert-danger">
+        {{error.messageKey | trans(error.messagedata, 'security')}}
+    </div>
+{% endif %}
+
+{# <h1> {{typeUser}} </h1> #}
+
+<div class="form">
+
+    <form action="{{path ('user_login')}}" method="post">   
+        <div class="form-group">
+            <label for="username"> Nom d'utilisateur </label>
+            <input type="text" id="username" name="_username" class="form-control" value="{{last_username}}">
+
+        </div>
+
+        <div class="form-group">
+            <label for="password"> Mot de passe </label>
+            <input type="password" id="password" name="_password" class="form-control">
+            
+        </div>
+
+        <button type="submit" class="">Se connecter</button>
+
+    </form>
+
+    <a href="{{path ('form_register',{ 'userType': "typeUser" })}}"><button type="submit" class="">S'inscrire</button></a>
+</div>
+{% endblock %}

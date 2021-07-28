@@ -34,6 +34,11 @@ class Message
      */
     private $id_user;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $checked;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +76,18 @@ class Message
     public function setIdUser(?user $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getChecked(): ?int
+    {
+        return $this->checked;
+    }
+
+    public function setChecked(int $checked): self
+    {
+        $this->checked = $checked;
 
         return $this;
     }

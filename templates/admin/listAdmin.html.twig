@@ -1,0 +1,20 @@
+{# <pre>
+    {{ dump(userId) }}
+</pre>
+
+<pre>
+    {{ dump(admin) }}
+</pre> #}
+
+{% include "base.html.twig" %}
+
+{% for adm in admin %}
+    <p> {{adm.getIdAdmin.getUsername}} - <button class="getDiscuss" id="{{adm.getIdAdmin.id}}">contacter</button> </p> 
+{% endfor %}
+
+<div class="modal" tabindex="-1" role="dialog">
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
+{% endblock %}

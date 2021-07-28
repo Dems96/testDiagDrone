@@ -1,3 +1,11 @@
-<div class="modalDiscuss">
-    {% include "home/discuss.html.twig" %}
-</div>
+<div class="discu">
+            {% for msg in message %}
+                {% if msg.getIdConversation.id == id_conversation %}
+                    <p class="msg" id="{{msg.checked}}"> {{msg.message}} {% if msg.getIdUser.getUsername != null %} envoyé par <span class="username"> {{msg.getIdUser.getUsername}} </span>  {% endif %} </p> {# on a l'id de la personne qui a envoyé le msg #}
+                {% endif %}
+            {% endfor %}
+    </div>
+
+    {# <pre>
+        {{ dump(message) }}
+    </pre> #}

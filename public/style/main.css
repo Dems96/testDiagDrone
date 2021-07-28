@@ -2,9 +2,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 53%;
+  margin-top: 30%;
 }
 
 .msg{
   border-bottom: 2px solid;
+}
+
+#sendDiv{
+  width: 74%;
+}
+
+.username{
+  font-weight: bold;
+}
+
+.listMsg{
+  margin-top: 3%;
 }

@@ -23,7 +23,7 @@
    <a href="{{path ('list_msg')}}"><button class="histoMsg"> Voir l'historique des messages </button></a> 
 
 {% else %}
-    <button class="contactAdmin"> Contacter un Admin </button>
+    <a href="{{path ('list_msg_user')}}"><button class="contactAdmin"> Contacter un Admin </button></a> 
 {% endif %}
 
 {% block javascripts %}

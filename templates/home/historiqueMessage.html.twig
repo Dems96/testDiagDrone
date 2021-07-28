@@ -1,41 +1,61 @@
 {% include "base.html.twig" %}
 
-{# <pre>
-    {{ dump(message) }}
-</pre> #}
-
-{# <pre>
-    {{ dump(conversation) }}
-</pre> #}
-{# 
-<pre>
-    {{ dump(utilisateur) }}
-</pre> #}
-
-{# <h4> discussion avec </h4> #}
-
 {% if app.user %}
     <a href="{{path('logout')}}"><button>se deconnecter</button></a>
 {% endif %}
 
+<h1>liste des conversations</h1>
+
+{% if is_granted('ROLE_ADMIN') %}
 <div class="listMsg">
     {% for conv in conversation %}
 
         {# {% if msg.getIdConversation.id == conversation.id %} {{msg.message}}#}
             <div class="msg">
-                <p> message de l'utilisateur numéro : {{conv.getIdUtilisateur.id}} <button class="getDiscuss" value="{{conv.id}}"> voir discussion</button> </p>
+                <p> message de l'utilisateur : {{conv.getIdUtilisateur.getIdUser.getUsername}} 
+                    <button class="getDiscuss" id="{{message[loop.index0].checked}}" name="{{message[loop.index0].getIdConversation.id}}" value="{{conv.id}}">
+                    voir discussion
+                    </button> 
+                 </p>
             </div>
-        {# {% endif %} #}
 
     {% endfor %}
 </div>
 
 <div class="modal" tabindex="-1" role="dialog">
-    {# {% include "modal/modalDiscu.html.twig" %} #}
 </div>
+
+{% else %}
+{# 
+    <pre>
+        {{ dump(conversation) }}
+    </pre> #}
+
+    <a href="{{path('list_admin')}}"><button>Voir les admin à contacter</button></a>
+
+    <div class="listMsg">
+    {% for conv in conversation %}
+
+        {% if conv.getIdUtilisateur.id == utilisateur.id %}
+            <div class="msg">
+                <p> message de l'admin : {{conv.getIdAdmin.getIdAdmin.getUsername}} 
+                    <button class="getDiscuss" id="{{message[loop.index0].checked}}" name="{{message[loop.index0].getIdConversation.id}}" value="{{conv.id}}">
+                    voir discussion
+                    </button> 
+                 </p>
+            </div>
+        {% endif %}
+        {# {% if msg.getIdConversation.id == conversation.id %} {{msg.message}} #}
+            
+
+    {% endfor %} 
+</div>
+
+<div class="modal" tabindex="-1" role="dialog">
+</div>
+{% endif %}
 
 
 {% block javascripts %}
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
 {% endblock %}

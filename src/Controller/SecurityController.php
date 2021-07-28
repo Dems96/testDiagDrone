@@ -10,6 +10,8 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Utilisateur;
+use App\Entity\Admin;
 
 class SecurityController extends AbstractController 
 {
@@ -60,6 +62,8 @@ class SecurityController extends AbstractController
      */
     public function registerForm(AuthenticationUtils $authenticationUtils, Request $request, $userType)
     {
+        dump($userType);
+        
         return $this->render("register/registerForm.html.twig", [
             'typeUser' => $userType,
         ]);
@@ -80,7 +84,6 @@ class SecurityController extends AbstractController
             $role = "ROLE_ADMIN";
         } else {
             $role = "ROLE_USER";
-
         }
 
         $user = new User();
@@ -90,6 +93,23 @@ class SecurityController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
+
+        $last_user = $entityManager->getRepository(User::class)->findOneBy([], ['id' => 'DESC']);
+
+        if($role == "ROLE_ADMIN"){
+            $admin = new Admin;
+            $admin->setIdAdmin($last_user);
+
+            $entityManager->persist($admin);
+            $entityManager->flush();   
+
+        } else {
+            $utilisateur = new Utilisateur;
+            $utilisateur->setIdUser($last_user);
+
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();  
+        }
 
         return $this->redirectToRoute('home');
     }
